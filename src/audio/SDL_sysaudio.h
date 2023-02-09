@@ -145,6 +145,9 @@ extern AudioBootStrap WAVEOUT_bootstrap;
 #if SDL_AUDIO_DRIVER_PAUD
 extern AudioBootStrap Paud_bootstrap;
 #endif
+#if SDL_AUDIO_DRIVER_UMS
+extern AudioBootStrap UMS_bootstrap;
+#endif
 #if SDL_AUDIO_DRIVER_BAUDIO
 extern AudioBootStrap BAUDIO_bootstrap;
 #endif

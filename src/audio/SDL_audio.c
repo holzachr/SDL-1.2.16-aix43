@@ -73,6 +73,9 @@ static AudioBootStrap *bootstrap[] = {
 #if SDL_AUDIO_DRIVER_PAUD
 	&Paud_bootstrap,
 #endif
+#if SDL_AUDIO_DRIVER_UMS
+	&UMS_bootstrap,
+#endif
 #if SDL_AUDIO_DRIVER_BAUDIO
 	&BAUDIO_bootstrap,
 #endif

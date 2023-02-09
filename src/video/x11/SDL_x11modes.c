@@ -35,7 +35,9 @@
 
 /*#define X11MODES_DEBUG*/
 
+#ifndef _AIX
 #define MAX(a, b)        (a > b ? a : b)
+#endif
 
 #if SDL_VIDEO_DRIVER_X11_XRANDR
 static int cmpmodelist(const void *va, const void *vb)

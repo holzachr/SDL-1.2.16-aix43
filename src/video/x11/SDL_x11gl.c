@@ -33,6 +33,8 @@
 #define DEFAULT_OPENGL	"/usr/X11R6/lib/libGL.1.dylib"
 #elif defined(__QNXNTO__)
 #define DEFAULT_OPENGL	"libGL.so.3"
+#elif defined(__AIX__)
+#define DEFAULT_OPENGL	"/usr/lib/libGL.a(shr.o)"
 #else
 #define DEFAULT_OPENGL	"libGL.so.1"
 #endif
@@ -450,7 +452,11 @@ void X11_GL_SwapBuffers(_THIS)
 #define OPENGL_REQUIRS_DLOPEN
 #if defined(OPENGL_REQUIRS_DLOPEN) && defined(SDL_LOADSO_DLOPEN)
 #include <dlfcn.h>
+#ifndef _AIX
 #define GL_LoadObject(X)	dlopen(X, (RTLD_NOW|RTLD_GLOBAL))
+#else
+#define GL_LoadObject(X)	dlopen(X, (RTLD_NOW|RTLD_GLOBAL|RTLD_MEMBER))
+#endif
 #define GL_LoadFunction		dlsym
 #define GL_UnloadObject		dlclose
 #else

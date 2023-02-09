@@ -87,7 +87,7 @@ enum {
 	ENCODING_UTF32BE,
 	ENCODING_UTF32LE,
 	ENCODING_UCS2,		/* Native byte order assumed */
-	ENCODING_UCS4,		/* Native byte order assumed */
+	ENCODING_UCS4 		/* Native byte order assumed */
 };
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 #define ENCODING_UTF16NATIVE	ENCODING_UTF16BE

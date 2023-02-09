@@ -32,7 +32,7 @@ case "$host" in
     *-*-aix*)
         EXE=""
         if test x$ac_cv_c_compiler_gnu = xyes; then
-            CFLAGS="-mthreads"
+            CFLAGS=""
         fi
         SYS_GL_LIBS=""
         ;;

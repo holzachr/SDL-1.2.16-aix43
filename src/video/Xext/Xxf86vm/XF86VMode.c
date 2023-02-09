@@ -102,11 +102,9 @@ static XEXT_GENERATE_CLOSE_DISPLAY (close_display, xf86vidmode_info)
  *****************************************************************************/
 
 Bool
-SDL_NAME(XF86VidModeQueryExtension)(
-    Display *dpy,
-    int *event_basep,
-    int *error_basep
-)
+SDL_NAME(XF86VidModeQueryExtension) (dpy, event_basep, error_basep)
+    Display *dpy;
+    int *event_basep, *error_basep;
 {
     XExtDisplayInfo *info = find_display (dpy);
 
@@ -120,11 +118,10 @@ SDL_NAME(XF86VidModeQueryExtension)(
 }
 
 Bool
-SDL_NAME(XF86VidModeQueryVersion)(
-    Display *dpy,
-    int *majorVersion,
-    int *minorVersion
-)
+SDL_NAME(XF86VidModeQueryVersion)(dpy, majorVersion, minorVersion)
+    Display* dpy;
+    int* majorVersion; 
+    int* minorVersion;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeQueryVersionReply rep;
@@ -218,12 +215,11 @@ SDL_NAME(XF86VidModeGetGamma)(Display *dpy, int screen, SDL_NAME(XF86VidModeGamm
 }
 
 Bool
-SDL_NAME(XF86VidModeGetModeLine)(
-    Display *dpy,
-    int screen,
-    int *dotclock,
-    SDL_NAME(XF86VidModeModeLine) *modeline
-)
+SDL_NAME(XF86VidModeGetModeLine)(dpy, screen, dotclock, modeline)
+    Display* dpy;
+    int screen;
+    int* dotclock; 
+    SDL_NAME(XF86VidModeModeLine)* modeline;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeGetModeLineReply rep;
@@ -296,12 +292,11 @@ SDL_NAME(XF86VidModeGetModeLine)(
 }
 
 Bool
-SDL_NAME(XF86VidModeGetAllModeLines)(
-    Display *dpy,
-    int screen,
-    int *modecount,
-    SDL_NAME(XF86VidModeModeInfo) ***modelinesPtr
-)
+SDL_NAME(XF86VidModeGetAllModeLines)(dpy, screen, modecount, modelinesPtr)
+    Display* dpy;
+    int screen;
+    int* modecount; 
+    SDL_NAME(XF86VidModeModeInfo) ***modelinesPtr;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeGetAllModeLinesReply rep;
@@ -461,12 +456,11 @@ SDL_NAME(XF86VidModeGetAllModeLines)(
 #endif
 
 Bool
-SDL_NAME(XF86VidModeAddModeLine)(
-    Display *dpy,
-    int screen,
-    SDL_NAME(XF86VidModeModeInfo) *newmodeline,
-    SDL_NAME(XF86VidModeModeInfo) *aftermodeline
-)
+SDL_NAME(XF86VidModeAddModeLine) (dpy, screen, newmodeline, aftermodeline)
+    Display *dpy;
+    int screen;
+    SDL_NAME(XF86VidModeModeInfo)* newmodeline;
+    SDL_NAME(XF86VidModeModeInfo)* aftermodeline;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeAddModeLineReq *req;
@@ -575,11 +569,10 @@ SDL_NAME(XF86VidModeAddModeLine)(
 }
 
 Bool
-SDL_NAME(XF86VidModeDeleteModeLine)(
-    Display *dpy,
-    int screen,
-    SDL_NAME(XF86VidModeModeInfo) *modeline
-)
+SDL_NAME(XF86VidModeDeleteModeLine) (dpy, screen, modeline)
+    Display *dpy;
+    int screen;
+    SDL_NAME(XF86VidModeModeInfo)* modeline;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeDeleteModeLineReq *req;
@@ -640,11 +633,10 @@ SDL_NAME(XF86VidModeDeleteModeLine)(
 }
 
 Bool
-SDL_NAME(XF86VidModeModModeLine)(
-    Display *dpy,
-    int screen,
-    SDL_NAME(XF86VidModeModeLine) *modeline
-)
+SDL_NAME(XF86VidModeModModeLine) (dpy, screen, modeline)
+    Display *dpy;
+    int screen;
+    SDL_NAME(XF86VidModeModeLine)* modeline;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeModModeLineReq *req;
@@ -703,11 +695,10 @@ SDL_NAME(XF86VidModeModModeLine)(
 }
 
 Status
-SDL_NAME(XF86VidModeValidateModeLine)(
-    Display *dpy,
-    int screen,
-    SDL_NAME(XF86VidModeModeInfo) *modeline
-)
+SDL_NAME(XF86VidModeValidateModeLine) (dpy, screen, modeline)
+    Display *dpy;
+    int screen;
+    SDL_NAME(XF86VidModeModeInfo)* modeline;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeValidateModeLineReq *req;
@@ -775,7 +766,10 @@ SDL_NAME(XF86VidModeValidateModeLine)(
 }
 
 Bool
-SDL_NAME(XF86VidModeSwitchMode)(Display *dpy, int screen, int zoom)
+SDL_NAME(XF86VidModeSwitchMode)(dpy, screen, zoom)
+    Display* dpy;
+    int screen;
+    int zoom;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeSwitchModeReq *req;
@@ -794,11 +788,10 @@ SDL_NAME(XF86VidModeSwitchMode)(Display *dpy, int screen, int zoom)
 }
     
 Bool
-SDL_NAME(XF86VidModeSwitchToMode)(
-    Display *dpy,
-    int screen,
-    SDL_NAME(XF86VidModeModeInfo) *modeline
-)
+SDL_NAME(XF86VidModeSwitchToMode)(dpy, screen, modeline)
+    Display* dpy;
+    int screen;
+    SDL_NAME(XF86VidModeModeInfo)* modeline;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeSwitchToModeReq *req;
@@ -884,7 +877,10 @@ SDL_NAME(XF86VidModeSwitchToMode)(
 }
     
 Bool
-SDL_NAME(XF86VidModeLockModeSwitch)(Display *dpy, int screen, int lock)
+SDL_NAME(XF86VidModeLockModeSwitch)(dpy, screen, lock)
+    Display* dpy;
+    int screen;
+    int lock;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeLockModeSwitchReq *req;
@@ -903,11 +899,10 @@ SDL_NAME(XF86VidModeLockModeSwitch)(Display *dpy, int screen, int lock)
 }
     
 Bool
-SDL_NAME(XF86VidModeGetMonitor)(
-    Display *dpy,
-    int screen,
-    SDL_NAME(XF86VidModeMonitor) *monitor
-)
+SDL_NAME(XF86VidModeGetMonitor)(dpy, screen, monitor)
+    Display* dpy;
+    int screen;
+    SDL_NAME(XF86VidModeMonitor)* monitor;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeGetMonitorReply rep;
@@ -1005,7 +1000,10 @@ SDL_NAME(XF86VidModeGetMonitor)(
 }
 
 Bool
-SDL_NAME(XF86VidModeGetViewPort)(Display *dpy, int screen, int *x, int *y)
+SDL_NAME(XF86VidModeGetViewPort)(dpy, screen, x, y)
+    Display* dpy;
+    int screen;
+    int *x, *y;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeGetViewPortReply rep;
@@ -1055,7 +1053,10 @@ SDL_NAME(XF86VidModeGetViewPort)(Display *dpy, int screen, int *x, int *y)
 }
 
 Bool
-SDL_NAME(XF86VidModeSetViewPort)(Display *dpy, int screen, int x, int y)
+SDL_NAME(XF86VidModeSetViewPort)(dpy, screen, x, y)
+    Display* dpy;
+    int screen;
+    int x, y;
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeSetViewPortReq *req;
@@ -1076,14 +1077,11 @@ SDL_NAME(XF86VidModeSetViewPort)(Display *dpy, int screen, int x, int y)
 }
 
 Bool
-SDL_NAME(XF86VidModeGetDotClocks)(
-    Display *dpy,
-    int screen,
-    int *flagsPtr,
-    int *numclocksPtr,
-    int *maxclocksPtr,
-    int *clocksPtr[]
-)
+SDL_NAME(XF86VidModeGetDotClocks)(dpy, screen,
+	    flagsPtr, numclocksPtr, maxclocksPtr, clocksPtr)
+    Display* dpy;
+    int screen;
+    int *flagsPtr, *numclocksPtr, *maxclocksPtr, *clocksPtr[]; 
 {
     XExtDisplayInfo *info = find_display (dpy);
     xXF86VidModeGetDotClocksReply rep;

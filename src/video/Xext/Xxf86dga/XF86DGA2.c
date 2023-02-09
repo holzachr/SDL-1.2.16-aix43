@@ -29,7 +29,9 @@ Copyright (c) 1995,1996  The XFree86 Project, Inc
 #include "../extensions/extutil.h"
 #include <stdio.h>
 
+#ifndef _AIX
 #include <stdint.h>
+#endif
 
 #if defined(ENABLE_FBCON)  /* Needed for framebuffer console support */
 #include <sys/ioctl.h>

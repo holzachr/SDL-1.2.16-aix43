@@ -1,51 +1,50 @@
+# SDL-1.2.16-aix43
 
-# DEPRECATED
+An attempt of porting SDL-1.2 to AIX 4.3.3.
+Feel free to use it for porting your favorite application to RS/6000!
 
-The 1.2 branch of SDL is deprecated. While we occasionally collect fixes
-in revision control, there has not been a formal release since 2012, and
-we have no intention to do future releases, either.
+Releases are compiled using xlC 6.0 for small footprint and maximum optimization.
 
-Current development is happening in SDL 2.0.x, which gets regular
-releases and can be found at:
+# Sound
+This version omits support for OSS, and rather incorporates drivers for IBM's UMS (Ultimedia Services) and the raw audio output using devices /dev/baud0 on Micro Channel systems and /dev/paud0 for PCI/onboard audio. 
+Some people have reported instabilities using OSS under AIX, so let's try without.
 
-https://github.com/libsdl-org/SDL
+Using the raw audio with a 100 ms buffer is the default; you shouldn't notice the delay.
 
-Thanks!
+To run any SDL using application using the UMS driver:
 
+```
+SDL_AUDIODRIVER="UMS" run_ums <application>
+```
 
+# Installation
 
-# Simple DirectMedia Layer (SDL) Version 1.2
+Extract to /opt/SDL or whereever you feel is right.
 
-https://www.libsdl.org/
+# Limitations
 
-This is the Simple DirectMedia Layer, a general API that provides low
-level access to audio, keyboard, mouse, joystick, 3D hardware via OpenGL,
-and 2D framebuffer across multiple platforms.
+I couldn't test many systems and graphics adapters, so rendering experience may very.
+I had trouble making the SDL test utility "testsprite" not crash.
+Feel invited to contribute ;-)
 
-The current version supports Linux, Windows CE/95/98/ME/XP/Vista, BeOS,
-MacOS Classic, Mac OS X, FreeBSD, NetBSD, OpenBSD, BSD/OS, Solaris, IRIX,
-and QNX.  The code contains support for Dreamcast, Atari, AIX, OSF/Tru64,
-RISC OS, SymbianOS, Nintendo DS, and OS/2, but these are not officially
-supported.
+# Building
 
-SDL is written in C, but works with C++ natively, and has bindings to
-several other languages, including Ada, C#, Eiffel, Erlang, Euphoria,
-Guile, Haskell, Java, Lisp, Lua, ML, Objective C, Pascal, Perl, PHP,
-Pike, Pliant, Python, Ruby, and Smalltalk.
+If you want to replicate:
 
-This library is distributed under GNU LGPL version 2, which can be
-found in the file  "COPYING".  This license allows you to use SDL
-freely in commercial programs as long as you link with the dynamic
-library.
+```
+. xlc-env-settings-aix43-ppc.sh
+./configure --prefix=/opt/SDL --enable-oss=no --enable-pthread-sem=no
+make
+make install
+```
 
-The best way to learn how to use SDL is to check out the header files in
-the "include" subdirectory and the programs in the "test" subdirectory.
-The header files and test programs are well commented and always up to date.
-More documentation is available in HTML format in "docs/index.html".
+# Additional SDL libraries
+Releases contain compiled versions of
+ - SDL_mixer
+ - SDL_net
+ - SDL_sound
 
-The test programs in the "test" subdirectory are in the public domain.
+Check out their repositories and licenses.
 
-Enjoy!
-
-Sam Lantinga (slouken@libsdl.org)
-
+# License
+Check the contained COPYING file for the authors' rights.

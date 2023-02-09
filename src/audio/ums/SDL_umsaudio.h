@@ -20,6 +20,8 @@
     griff@kom.tu-darmstadt.de
 
     based on linux/SDL_dspaudio.h by Sam Lantinga
+
+    Reworked 2022 by Christian Holzapfel
 */
 #include "SDL_config.h"
 
@@ -33,6 +35,9 @@
 /* Hidden "this" pointer for the video functions */
 #define _THIS	SDL_AudioDevice *this
 
+#define _dev    this->hidden->umsdev
+#define _ev     this->hidden->ev
+
 struct SDL_PrivateAudioData
 {
     /* Pointer to the (open) UMS audio device */
@@ -41,7 +46,6 @@ struct SDL_PrivateAudioData
 
     /* Raw mixing buffer */
     UMSAudioTypes_Buffer playbuf;
-    UMSAudioTypes_Buffer fillbuf;
 
     long bytesPerSample;
 };

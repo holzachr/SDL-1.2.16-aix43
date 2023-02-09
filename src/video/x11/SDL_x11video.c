@@ -152,9 +152,7 @@ static SDL_VideoDevice *X11_CreateDevice(int devindex)
 		device->FreeHWSurface = X11_FreeHWSurface;
 		device->SetGamma = X11_SetVidModeGamma;
 		device->GetGamma = X11_GetVidModeGamma;
-#if 0 /* Disable SetGammaRamp on modern X servers */
 		device->SetGammaRamp = X11_SetGammaRamp;
-#endif
 		device->GetGammaRamp = NULL;
 #if SDL_VIDEO_OPENGL_GLX
 		device->GL_LoadLibrary = X11_GL_LoadLibrary;
@@ -1534,8 +1532,8 @@ void X11_VideoQuit(_THIS)
 							 SDL_Screen);
 			for(pixel = 0; pixel < 256; ++pixel) {
 				while(SDL_iconcolors[pixel] > 0) {
-					XFreeColors(GFX_Display,
-						    dcmap, &pixel, 1, 0);
+//					XFreeColors(GFX_Display,
+//						    dcmap, &pixel, 1, 0);
 					--SDL_iconcolors[pixel];
 				}
 			}

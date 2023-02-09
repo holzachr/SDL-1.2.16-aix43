@@ -50,8 +50,7 @@ static /* const */ char *panoramiX_extension_name = PANORAMIX_PROTOCOL_NAME;
 #define PanoramiXSimpleCheckExtension(dpy,i) \
   XextSimpleCheckExtension (dpy, i, panoramiX_extension_name)
 
-static int close_display(Display*, XExtCodes*);
-
+static int close_display();
 static /* const */ XExtensionHooks panoramiX_extension_hooks = {
     NULL,				/* create_gc */
     NULL,				/* copy_gc */

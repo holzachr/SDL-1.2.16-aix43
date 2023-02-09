@@ -68,7 +68,7 @@
 #include "../../events/SDL_events_c.h"
 
 
-#ifdef __POWERPC__
+#ifdef __powerpc__
 /* 
     This is a workaround to directly access NSOpenGLContext's CGL context
     We need this to check for errors NSOpenGLContext doesn't support

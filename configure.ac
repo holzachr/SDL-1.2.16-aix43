@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
 AC_CONFIG_SRCDIR([src/SDL.c])
-AC_CONFIG_HEADERS([include/SDL_config.h])
+AC_CONFIG_HEADERS(include/SDL_config.h)
 AC_GNU_SOURCE
 AC_CONFIG_AUX_DIR([build-scripts])
 
@@ -164,6 +164,14 @@ dnl Check for typedefs, structures, etc.
     AC_FUNC_ALLOCA
 
 dnl Checks for library functions.
+    AC_FUNC_MEMCMP
+    if test x$ac_cv_func_memcmp_working = xyes; then
+        AC_DEFINE(HAVE_MEMCMP)
+    fi
+    AC_FUNC_STRTOD
+    if test x$ac_cv_func_strtod = xyes; then
+        AC_DEFINE(HAVE_STRTOD)
+    fi
     AC_CHECK_FUNC(mprotect,
         AC_TRY_COMPILE([
           #include <sys/types.h>
@@ -172,7 +180,7 @@ dnl Checks for library functions.
         AC_DEFINE(HAVE_MPROTECT)
         ]),
     )
-    AC_CHECK_FUNCS(malloc calloc realloc free getenv putenv unsetenv qsort abs bcopy memset memcmp memcpy memmove strlen strlcpy strlcat strdup _strrev _strupr _strlwr strchr strrchr strstr itoa _ltoa _uitoa _ultoa strtod strtol strtoul _i64toa _ui64toa strtoll strtoull atoi atof strcmp strncmp _stricmp strcasecmp _strnicmp strncasecmp sscanf snprintf vsnprintf iconv sigaction setjmp nanosleep getauxval elf_aux_info)
+    AC_CHECK_FUNCS(malloc calloc realloc free getenv putenv unsetenv qsort abs bcopy memset memcpy memmove strlen strlcpy strlcat strdup _strrev _strupr _strlwr strchr strrchr strstr itoa _ltoa _uitoa _ultoa strtol strtoul _i64toa _ui64toa strtoll strtoull atoi atof strcmp strncmp _stricmp strcasecmp _strnicmp strncasecmp sscanf snprintf vsnprintf iconv sigaction setjmp nanosleep getauxval elf_aux_info)
 
     AC_CHECK_LIB(iconv, libiconv_open, [EXTRA_LDFLAGS="$EXTRA_LDFLAGS -liconv"])
     AC_CHECK_LIB(m, pow, [EXTRA_LDFLAGS="$EXTRA_LDFLAGS -lm"])
@@ -1927,8 +1935,8 @@ dnl This is used on Linux for glibc binary compatibility (Doh!)
             pthread_lib="-lpthread"
             ;;
         *-*-aix*)
-            pthread_cflags="-D_REENTRANT -mthreads"
-            pthread_lib="-lpthread"
+            pthread_cflags="-D_AIX -DXTHREADS -D_REENTRANT -D_THREAD_SAFE"
+            pthread_lib="-lpthread -lUMSobj"
             ;;
         *-*-hpux11*)
             pthread_cflags="-D_REENTRANT"
@@ -2461,7 +2469,9 @@ case "$host" in
             ;;
             aix)
                 AC_DEFINE(SDL_AUDIO_DRIVER_PAUD)
+                AC_DEFINE(SDL_AUDIO_DRIVER_UMS)
                 SOURCES="$SOURCES $srcdir/src/audio/paudio/*.c"
+                SOURCES="$SOURCES $srcdir/src/audio/ums/*.c"
                 have_audio=yes
             ;;
           esac
