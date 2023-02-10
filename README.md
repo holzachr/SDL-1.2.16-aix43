@@ -10,6 +10,7 @@ This version omits support for OSS, and rather incorporates drivers for IBM's UM
 Some people have reported instabilities using OSS under AIX, so let's try without.
 
 Using the raw audio with a 100 ms buffer is the default; you shouldn't notice the delay.
+The UMS driver feels faster in some constellations, probably because it uses DMA.
 
 To run any SDL using application using the UMS driver:
 
@@ -26,6 +27,22 @@ Extract to /opt/SDL or whereever you feel is right.
 I couldn't test many systems and graphics adapters, so rendering experience may very.
 I had trouble making the SDL test utility "testsprite" not crash.
 Feel invited to contribute ;-)
+
+
+# Optimizing performance
+
+Under AIX you can accelerate video output by enabling the MIT-SHM X11 extension for fast shared memory. Do
+```
+export DISPLAY=:0.0
+export EXTSHM=on
+```
+before launching the executable.
+
+Using the SDL driver for the Ultimedia Services (UMS) instead of direct audio seems to make use of the sound card's DMA capability, if available:
+```
+export SDL_AUDIODRIVER="UMS"
+run_ums <application>
+```
 
 # Building
 
